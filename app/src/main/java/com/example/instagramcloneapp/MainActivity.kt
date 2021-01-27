@@ -1,9 +1,9 @@
 package com.example.instagramcloneapp
 
-import Fragements.HomeFragment
-import Fragements.NotificationsFragment
-import Fragements.ProfileFragment
-import Fragements.SearchFragment
+import Fragments.HomeFragment
+import Fragments.NotificationsFragment
+import Fragments.ProfileFragment
+import Fragments.SearchFragment
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

@@ -1,9 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Fragements.NotificationsFragment">
-
+    tools:context="Fragments.NotificationsFragment">
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -25,21 +25,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Notifications"
-                    android:textSize="10sp"
+                    android:textSize="18sp"
                     android:maxLines="1"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
-                    android:layout_centerVertical="true"/>
-
+                    android:layout_centerVertical="true"
+                    />
 
             </RelativeLayout>
+
         </androidx.appcompat.widget.Toolbar>
+
     </com.google.android.material.appbar.AppBarLayout>
+
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -47,6 +49,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:layout_below="@+id/app_bar_layout_notifications"/>
+        android:layout_below="@+id/app_bar_layout_notifications"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
 
 </RelativeLayout>
