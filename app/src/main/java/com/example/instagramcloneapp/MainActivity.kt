@@ -11,47 +11,51 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
+
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.nav_home -> {
-                movetoFragment(HomeFragment())
+                moveToFragment(HomeFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_search -> {
-                movetoFragment(SearchFragment())
+                moveToFragment(SearchFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_add_post -> {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_notifications -> {
-                movetoFragment(NotificationsFragment())
+                moveToFragment(NotificationsFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_profile -> {
-                movetoFragment(ProfileFragment())
+                moveToFragment(ProfileFragment())
                 return@OnNavigationItemSelectedListener true
             }
         }
 
-    false
+        false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
+
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
-        movetoFragment(HomeFragment())
 
+        moveToFragment(HomeFragment())
     }
 
-    private fun movetoFragment(fragment: Fragment) {
-         val fragmentTrans = supportFragmentManager.beginTransaction()
+
+    private fun moveToFragment(fragment: Fragment)
+    {
+        val fragmentTrans = supportFragmentManager.beginTransaction()
         fragmentTrans.replace(R.id.fragment_container, fragment)
         fragmentTrans.commit()
     }
-
 }

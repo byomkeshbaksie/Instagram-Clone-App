@@ -2,20 +2,21 @@ package com
 
 import android.app.ProgressDialog
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.instagramcloneapp.MainActivity
 import com.example.instagramcloneapp.R
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import kotlinx.android.synthetic.main.activity_signin.*
 
 class SignInActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signin)
+        setContentView(R.layout.activity_sign_in)
 
 
         signup_link_btn.setOnClickListener {
@@ -27,6 +28,10 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+
+
+
+
     private fun loginUser()
     {
         val email = email_login.text.toString()
@@ -34,8 +39,8 @@ class SignInActivity : AppCompatActivity() {
 
         when
         {
-            TextUtils.isEmpty(email) -> Toast.makeText(this, "email is required", Toast.LENGTH_LONG).show()
-            TextUtils.isEmpty(password) -> Toast.makeText(this, "password is required", Toast.LENGTH_LONG).show()
+            TextUtils.isEmpty(email) -> Toast.makeText(this, "email is required.", Toast.LENGTH_LONG).show()
+            TextUtils.isEmpty(password) -> Toast.makeText(this, "password is required.", Toast.LENGTH_LONG).show()
 
             else ->
             {
@@ -69,6 +74,8 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+
+
     override fun onStart() {
         super.onStart()
 
@@ -80,5 +87,4 @@ class SignInActivity : AppCompatActivity() {
             finish()
         }
     }
-
 }

@@ -8,10 +8,11 @@ class User
     private var image: String = ""
     private var uid: String = ""
 
+
     constructor()
 
 
-    constructor(usernamr: String, fullname: String, bio: String, image: String, uid: String)
+    constructor(username: String, fullname: String, bio: String, image: String, uid: String)
     {
         this.username = username
         this.fullname = fullname
@@ -20,9 +21,10 @@ class User
         this.uid = uid
     }
 
+
     fun getUsername(): String
     {
-        return username
+        return  username
     }
 
     fun setUsername(username: String)
@@ -33,7 +35,7 @@ class User
 
     fun getFullname(): String
     {
-        return fullname
+        return  fullname
     }
 
     fun setFullname(fullname: String)
@@ -42,9 +44,9 @@ class User
     }
 
 
-    fun getbio(): String
+    fun getBio(): String
     {
-        return bio
+        return  bio
     }
 
     fun setBio(bio: String)
@@ -55,7 +57,7 @@ class User
 
     fun getImage(): String
     {
-        return image
+        return  image
     }
 
     fun setImage(image: String)
@@ -66,14 +68,11 @@ class User
 
     fun getUID(): String
     {
-        return uid
+        return  uid
     }
 
     fun setUID(uid: String)
     {
         this.uid = uid
     }
-
-
-
 }

@@ -26,21 +26,9 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
+ *
  */
 class ProfileFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
     private lateinit var profileId: String
     private lateinit var firebaseUser: FirebaseUser
 
@@ -52,16 +40,24 @@ class ProfileFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
         firebaseUser = FirebaseAuth.getInstance().currentUser!!
+
+
         val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
-        if (pref != null) {
-            this.profileId = pref.getString("profileId", "none")!!
+        if (pref != null)
+        {
+            this.profileId = pref.getString("profileId", "none").toString()
         }
 
-        if (profileId == firebaseUser.uid) {
+
+        if (profileId == firebaseUser.uid)
+        {
             view.edit_account_settings_btn.text = "Edit Profile"
-        } else if (profileId != firebaseUser.uid) {
+        }
+        else if (profileId != firebaseUser.uid)
+        {
             checkFollowAndFollowingButtonStatus()
         }
+
 
         view.edit_account_settings_btn.setOnClickListener {
             val getButtonText = view.edit_account_settings_btn.text.toString()
@@ -72,42 +68,45 @@ class ProfileFragment : Fragment() {
 
                 getButtonText == "Follow" -> {
 
-                    firebaseUser?.uid.let { itl ->
+                    firebaseUser?.uid.let { it1 ->
                         FirebaseDatabase.getInstance().reference
-                                .child("Follow").child(itl.toString())
+                                .child("Follow").child(it1.toString())
                                 .child("Following").child(profileId)
                                 .setValue(true)
                     }
 
-                    firebaseUser?.uid.let { itl ->
+                    firebaseUser?.uid.let { it1 ->
                         FirebaseDatabase.getInstance().reference
                                 .child("Follow").child(profileId)
-                                .child("Followers").child(itl.toString())
+                                .child("Followers").child(it1.toString())
                                 .setValue(true)
                     }
+
                 }
 
                 getButtonText == "Following" -> {
 
-                    firebaseUser?.uid.let { itl ->
+                    firebaseUser?.uid.let { it1 ->
                         FirebaseDatabase.getInstance().reference
-                                .child("Follow").child(itl.toString())
+                                .child("Follow").child(it1.toString())
                                 .child("Following").child(profileId)
                                 .removeValue()
                     }
 
-                    firebaseUser?.uid.let { itl ->
+                    firebaseUser?.uid.let { it1 ->
                         FirebaseDatabase.getInstance().reference
                                 .child("Follow").child(profileId)
-                                .child("Followers").child(itl.toString())
+                                .child("Followers").child(it1.toString())
                                 .removeValue()
                     }
+
                 }
             }
+
         }
 
         getFollowers()
-        getFollowing()
+        getFollowings()
         userInfo()
 
         return view
@@ -115,19 +114,19 @@ class ProfileFragment : Fragment() {
 
     private fun checkFollowAndFollowingButtonStatus()
     {
-        val followingRef = firebaseUser?.uid.let { itl ->
+        val followingRef = firebaseUser?.uid.let { it1 ->
             FirebaseDatabase.getInstance().reference
-                    .child("Follow").child(itl.toString())
+                    .child("Follow").child(it1.toString())
                     .child("Following")
         }
 
-        if(followingRef != null)
+        if (followingRef != null)
         {
             followingRef.addValueEventListener(object : ValueEventListener
             {
                 override fun onDataChange(p0: DataSnapshot)
                 {
-                    if(p0.child(profileId).exists())
+                    if (p0.child(profileId).exists())
                     {
                         view?.edit_account_settings_btn?.text = "Following"
                     }
@@ -144,14 +143,14 @@ class ProfileFragment : Fragment() {
         }
     }
 
+
     private fun getFollowers()
     {
         val followersRef = FirebaseDatabase.getInstance().reference
-                    .child("Follow").child(profileId)
-                    .child("Followers")
+                .child("Follow").child(profileId)
+                .child("Followers")
 
-
-        followersRef.addValueEventListener(object  : ValueEventListener
+        followersRef.addValueEventListener(object : ValueEventListener
         {
             override fun onDataChange(p0: DataSnapshot)
             {
@@ -161,20 +160,21 @@ class ProfileFragment : Fragment() {
                 }
             }
 
-            override fun onCancelled(p0: DatabaseError)
-            {
+            override fun onCancelled(p0: DatabaseError) {
+
             }
         })
     }
 
-    private fun getFollowing()
+
+    private fun getFollowings()
     {
         val followersRef = FirebaseDatabase.getInstance().reference
-                    .child("Follow").child(profileId)
-                    .child("Following")
+                .child("Follow").child(profileId)
+                .child("Following")
 
 
-        followersRef.addValueEventListener(object  : ValueEventListener
+        followersRef.addValueEventListener(object : ValueEventListener
         {
             override fun onDataChange(p0: DataSnapshot)
             {
@@ -184,11 +184,12 @@ class ProfileFragment : Fragment() {
                 }
             }
 
-            override fun onCancelled(p0: DatabaseError)
-            {
+            override fun onCancelled(p0: DatabaseError) {
+
             }
         })
     }
+
 
     private fun userInfo()
     {
@@ -205,15 +206,16 @@ class ProfileFragment : Fragment() {
                     Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(view?.pro_image_profile_frag)
                     view?.profile_fragment_username?.text = user!!.getUsername()
                     view?.full_name_profile_frag?.text = user!!.getFullname()
-                    view?.bio_profile_frag?.text = user!!.getbio()
+                    view?.bio_profile_frag?.text = user!!.getBio()
                 }
             }
 
-            override fun onCancelled(p0: DatabaseError)
-            {
+            override fun onCancelled(p0: DatabaseError) {
+
             }
         })
     }
+
 
     override fun onStop() {
         super.onStop()
@@ -229,37 +231,13 @@ class ProfileFragment : Fragment() {
         val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
         pref?.putString("profileId", firebaseUser.uid)
         pref?.apply()
-
     }
 
-    override fun onDestroyOptionsMenu() {
-        super.onDestroyOptionsMenu()
+    override fun onDestroy() {
+        super.onDestroy()
 
         val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
         pref?.putString("profileId", firebaseUser.uid)
         pref?.apply()
     }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                ProfileFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
-                }
-    }
 }
-
-
-

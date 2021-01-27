@@ -11,7 +11,10 @@ import com.example.instagramcloneapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.util.*
+import kotlin.collections.HashMap
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -19,26 +22,31 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
+
         signin_link_btn.setOnClickListener {
             startActivity(Intent(this, SignInActivity::class.java))
         }
 
+
         signup_btn.setOnClickListener {
-            CreateAccount ()
+            CreateAccount()
         }
     }
 
-    private fun CreateAccount() {
+
+
+    private fun CreateAccount()
+    {
         val fullName = fullname_signup.text.toString()
         val userName = username_signup.text.toString()
         val email = email_signup.text.toString()
         val password = password_signup.text.toString()
 
-        when {
-            TextUtils.isEmpty(fullName) -> Toast.makeText(this, "full name is required", Toast.LENGTH_LONG).show()
-            TextUtils.isEmpty(userName) -> Toast.makeText(this, "user name is required", Toast.LENGTH_LONG).show()
-            TextUtils.isEmpty(email) -> Toast.makeText(this, "email is required", Toast.LENGTH_LONG).show()
-            TextUtils.isEmpty(password) -> Toast.makeText(this, "password is required", Toast.LENGTH_LONG).show()
+        when{
+            TextUtils.isEmpty(fullName) -> Toast.makeText(this, "full name is required.", Toast.LENGTH_LONG).show()
+            TextUtils.isEmpty(userName) -> Toast.makeText(this, "user name is required.", Toast.LENGTH_LONG).show()
+            TextUtils.isEmpty(email) -> Toast.makeText(this, "email is required.", Toast.LENGTH_LONG).show()
+            TextUtils.isEmpty(password) -> Toast.makeText(this, "password is required.", Toast.LENGTH_LONG).show()
 
             else -> {
                 val progressDialog = ProgressDialog(this@SignUpActivity)
@@ -50,7 +58,7 @@ class SignUpActivity : AppCompatActivity() {
                 val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
                 mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener { task ->
+                        .addOnCompleteListener{ task ->
                             if (task.isSuccessful)
                             {
                                 saveUserInfo(fullName, userName, email, progressDialog)
@@ -67,6 +75,8 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+
+
     private fun saveUserInfo(fullName: String, userName: String, email: String, progressDialog: ProgressDialog)
     {
         val currentUserID = FirebaseAuth.getInstance().currentUser!!.uid
@@ -77,15 +87,15 @@ class SignUpActivity : AppCompatActivity() {
         userMap["fullname"] = fullName.toLowerCase()
         userMap["username"] = userName.toLowerCase()
         userMap["email"] = email
-        userMap["bio"] = "Hey, I am using Instagram Clone App."
-        userMap["image"] = "https://firebasestorage.googleapis.com/v0/b/instagram-clone-app-d21df.appspot.com/o/Default%20images%2Fprofile.png?alt=media&token=8b95ac03-6ab5-485d-be95-caf1b2113f41"
+        userMap["bio"] = "hey i am using Coding Cafe Instagram Clone App."
+        userMap["image"] = "https://firebasestorage.googleapis.com/v0/b/instagram-clone-app-ec78a.appspot.com/o/Default%20Images%2Fprofile.png?alt=media&token=aac2c4a5-5e20-4390-bded-ef05d53b9348"
 
         usersRef.child(currentUserID).setValue(userMap)
                 .addOnCompleteListener { task ->
-                    if(task.isSuccessful)
+                    if (task.isSuccessful)
                     {
                         progressDialog.dismiss()
-                        Toast.makeText(this, "Account has been crated Successfully.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Account has been created successfully.", Toast.LENGTH_LONG).show()
 
                         val intent = Intent(this@SignUpActivity, MainActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/app_bar_layout_profile_frag"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        >
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/profile_toolbar"
@@ -18,17 +19,18 @@
             android:layout_marginTop="4dp"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
-            android:background="@android:color/white">
+            android:background="@android:color/white"
+            >
 
             <RelativeLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/profile_fragment_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Username"
+                    android:text="username"
                     android:textSize="18dp"
                     android:maxLines="1"
                     android:textStyle="bold"
@@ -41,16 +43,16 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/options"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
                     />
-
 
             </RelativeLayout>
 
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
+
 
 
 
@@ -72,15 +74,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="16dp"
+                >
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/pro_image_profile_frag"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:src="@drawable/profile"
+
                     />
-                
+
                 <LinearLayout
                     android:layout_width="190dp"
                     android:layout_height="90dp"
@@ -126,8 +130,8 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:layout_marginLeft="7dp"
+                            android:gravity="center"
                             android:orientation="vertical"
                             >
 
@@ -154,8 +158,8 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:layout_marginLeft="7dp"
+                            android:gravity="center"
                             android:orientation="vertical"
                             >
 
@@ -177,8 +181,8 @@
                                 android:textColor="@android:color/black"
                                 />
 
-                        </LinearLayout>
 
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -189,13 +193,14 @@
                         android:text="Edit Profile"
                         android:textAllCaps="false"
                         android:layout_marginTop="2dp"
-                        android:layout_marginLeft="10sp"
+                        android:layout_marginLeft="10dp"
                         android:background="@drawable/buttons_background"
                         />
 
                 </LinearLayout>
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/mid_bar"
@@ -224,14 +229,13 @@
                     android:textColor="@android:color/black"
                     />
 
-
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@drawable/buttons_background"
+                android:background="@drawable/button_black_background"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
@@ -260,10 +264,6 @@
 
         </LinearLayout>
 
-
     </ScrollView>
-
-
-
 
 </RelativeLayout>
