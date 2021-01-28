@@ -4,9 +4,11 @@ import Fragments.HomeFragment
 import Fragments.NotificationsFragment
 import Fragments.ProfileFragment
 import Fragments.SearchFragment
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.AddPostActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +25,8 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_add_post -> {
+                item.isChecked = false
+                startActivity(Intent(this@MainActivity, AddPostActivity::class.java))
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_notifications -> {
